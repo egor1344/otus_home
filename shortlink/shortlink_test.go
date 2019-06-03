@@ -4,7 +4,7 @@ import "testing"
 
 func TestShorten(t *testing.T) {
 	var urllist URLList
-	urllist.InitDB()
+	urllist.NewURLList()
     firstShortenURL := urllist.Shorten("https://otus.ru/learning/24319/")
     if firstShortenURL != "https://otus.ru/1" {
         t.Error("Wrong result ", firstShortenURL)
@@ -17,7 +17,7 @@ func TestShorten(t *testing.T) {
 
 func TestResolve(t *testing.T) {
 	var urllist URLList
-	urllist.InitDB()
+	urllist.NewURLList()
 	shortlink := urllist.Shorten("https://otus.ru/learning/24319/")
 	if shortlink != "https://otus.ru/1" {
 		t.Error("Wrong result ", shortlink)

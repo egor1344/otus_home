@@ -15,13 +15,13 @@ type Shortener interface {
 // URLList - структура, содержит в себе базу(пока мапа), и текущий ключ.
 // (написал реализацию что первое в голову пришло)
 type URLList struct {
-	Db  map[string]string
+	db  map[string]string
 	Key int64
 }
 
-// InitDB - инициализация базы(на данный момент мапы)
-func (u *URLList) InitDB() {
-	u.Db = make(map[string]string)
+// NewURLList - инициализация базы(на данный момент мапы)
+func (u *URLList) NewURLList() {
+	u.db = make(map[string]string)
 }
 
 // shoterAlgoritm - Алгоритм для сжатия url, пока выбрал самый простой в реализации
@@ -38,19 +38,18 @@ func shoterAlgoritm(u *URLList, urllong string) string {
 
 // Shorten - Сокращение url
 func (u *URLList) Shorten(urllong string) string {
-	urlshort, exists := u.Db[urllong]
-	if exists != true {
-		urlshort = shoterAlgoritm(u, urllong)
-		u.Db[urlshort] = urllong
+	if urlshort, exists := u.db[urllong]; exists {
+		return urlshort
 	}
+	urlshort := shoterAlgoritm(u, urllong)
+	u.db[urlshort] = urllong
 	return urlshort
 }
 
 // Resolve - Расшифровка url
 func (u *URLList) Resolve(urlshort string) string {
-	urllong, exists := u.Db[urlshort]
-	if exists != true {
-		return ""
+	if urllong, exists := u.db[urlshort]; exists {
+		return urllong
 	}
-	return urllong
+	return ""
 }
