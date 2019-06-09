@@ -26,4 +26,8 @@ func TestResolve(t *testing.T) {
 	if normallink != "https://otus.ru/learning/24319/" {
 		t.Error("Wrong result ", normallink)
 	}
+	wronglink := urllist.Resolve("https://otus.ru/asd")
+	if wronglink != "" {
+		t.Error("Wrong result ", wronglink)
+	}
 }

@@ -48,8 +48,5 @@ func (u *URLList) Shorten(urllong string) string {
 
 // Resolve - Расшифровка url
 func (u *URLList) Resolve(urlshort string) string {
-	if urllong, exists := u.db[urlshort]; exists {
-		return urllong
-	}
-	return ""
+	return u.db[urlshort]
 }
