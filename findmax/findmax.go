@@ -8,6 +8,9 @@ import (
 func Max(slice interface{}, less func(i, j int) bool) int {
 	rv := reflect.ValueOf(slice)
 	length := rv.Len()
+	if length == 0 {
+		return 0
+	}
 	maxValueIndex := findMax(less, length)
 	return maxValueIndex
 }
