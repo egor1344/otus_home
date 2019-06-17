@@ -1,26 +1,19 @@
 package findmax
 
 import (
-	"reflect"
+	"errors"
 )
 
 // Max - func return index max value
-func Max(slice interface{}, less func(i, j int) bool) int {
-	rv := reflect.ValueOf(slice)
-	length := rv.Len()
-	if length == 0 {
-		return 0
+func Max(slice []interface{}, less func(i, j int) bool) (int, error) {
+	if len(slice) == 0 {
+		return 0, errors.New("Slice len = 0")
 	}
-	maxValueIndex := findMax(less, length)
-	return maxValueIndex
-}
-
-func findMax(lessFunc func(i, j int) bool, len int) int {
-	maxValueIndex := 0
-	for i := 0; i < (len - 1); i++ {
-		if !lessFunc(maxValueIndex, i+1) {
-			maxValueIndex = i + 1
+	var maxValueIndex int
+	for i := range slice {
+		if !less(maxValueIndex, i) {
+			maxValueIndex = i
 		}
 	}
-	return maxValueIndex
+	return maxValueIndex, nil
 }
