@@ -1,9 +1,9 @@
 package logotus
 
 import (
-	"fmt"
 	"io"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -19,10 +19,12 @@ type HwAccepted struct {
 func (ha *HwAccepted) String() string {
 	var t time.Time
 	t = time.Now()
-	s := t.Format("2019-01-01")
-	s += " " + strconv.Itoa(ha.Id)
-	s += " " + strconv.Itoa(ha.Grade)
-	return s
+	var b strings.Builder
+	b.WriteString(t.Format("2019-01-01"))
+	b.WriteString(" " + strconv.Itoa(ha.Id))
+	b.WriteString(" " + strconv.Itoa(ha.Grade))
+	b.WriteString("\n")
+	return b.String()
 }
 
 type HwSubmitted struct {
@@ -34,19 +36,15 @@ type HwSubmitted struct {
 func (hs *HwSubmitted) String() string {
 	var t time.Time
 	t = time.Now()
-	s := t.Format("2019-01-01")
-	s += " " + strconv.Itoa(hs.ID)
-	s += " " + hs.Code
-	s += " " + hs.Comment
-	return s
+	var b strings.Builder
+	b.WriteString(t.Format("2019-01-01"))
+	b.WriteString(" " + strconv.Itoa(hs.ID))
+	b.WriteString(" " + hs.Code)
+	b.WriteString(" " + hs.Comment)
+	b.WriteString("\n")
+	return b.String()
 }
 
 func LogOtusEvent(e OtusEvent, w io.Writer) {
-	switch e.(type) {
-	case *HwAccepted:
-		fmt.Printf("%v\n", e)
-	case *HwSubmitted:
-		fmt.Printf("%v\n", e)
-
-	}
+	io.WriteString(w, e.String())
 }
