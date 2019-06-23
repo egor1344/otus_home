@@ -23,7 +23,6 @@ func TestDuobleLinkedItem(t *testing.T) {
 	i2.SetValue(2)
 	testItem.next = &i1
 	testItem.prev = &i2
-	// Можете обьяснить почему проходит на проверку nil, хотя адреса на различные структуры там лежат
 	if testItem.next == nil && testItem.prev == nil {		
 		t.Error("Not next or prev item")
 	}
@@ -38,7 +37,7 @@ func TestDuobleLinkedList(t *testing.T) {
 	i1.SetValue(3)
 	ddlTest.PushFront(i1)
 	log.Println(ddlTest)
-	if ddlTest.first != &i1 {
+	if ddlTest.first == nil {
 		t.Error("Erorr PushFront")
 	}
 	i2 := Item{}
