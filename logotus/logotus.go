@@ -20,9 +20,11 @@ func (ha *HwAccepted) String() string {
 	var t time.Time
 	t = time.Now()
 	var b strings.Builder
-	b.WriteString(t.Format("2019-01-01"))
-	b.WriteString(" " + strconv.Itoa(ha.Id))
-	b.WriteString(" " + strconv.Itoa(ha.Grade))
+	b.WriteString(t.Format("2006-01-02"))
+	b.WriteString(" ")
+	b.WriteString(strconv.Itoa(ha.Id))
+	b.WriteString(" ")
+	b.WriteString(strconv.Itoa(ha.Grade))
 	b.WriteString("\n")
 	return b.String()
 }
@@ -37,14 +39,17 @@ func (hs *HwSubmitted) String() string {
 	var t time.Time
 	t = time.Now()
 	var b strings.Builder
-	b.WriteString(t.Format("2019-01-01"))
-	b.WriteString(" " + strconv.Itoa(hs.ID))
-	b.WriteString(" " + hs.Code)
-	b.WriteString(" " + hs.Comment)
+	b.WriteString(t.Format("2006-01-02"))
+	b.WriteString(" ")
+	b.WriteString(strconv.Itoa(hs.ID))
+	b.WriteString(" ")
+	b.WriteString(hs.Code)
+	b.WriteString(" ")
+	b.WriteString(hs.Comment)
 	b.WriteString("\n")
 	return b.String()
 }
 
 func LogOtusEvent(e OtusEvent, w io.Writer) {
-	io.WriteString(w, e.String())
+	w.Write([]byte(e.String()))
 }
