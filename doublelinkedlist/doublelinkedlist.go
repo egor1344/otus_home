@@ -1,9 +1,5 @@
 package doublelinkedlist
 
-import (
-	"log"
-)
-
 type Item struct {
 	value interface{}
 	list  *DoubleLinkedList
@@ -52,21 +48,11 @@ func (i *Item) Remove() {
 type DoubleLinkedList struct {
 	first *Item
 	last  *Item
+	len   int
 }
 
 func (dll *DoubleLinkedList) Len() int {
-	if dll.first == nil {
-		return 0
-	}
-	if dll.First().next == nil {
-		return 1
-	}
-	counter := 1
-	for j := dll.First(); j.next != nil; j = j.next {
-		counter++
-		log.Println(counter)
-	}
-	return counter
+	return dll.len
 }
 
 func (dll *DoubleLinkedList) First() *Item {
@@ -98,6 +84,7 @@ func (dll *DoubleLinkedList) PushFront(i Item) {
 	if dll.first.list == nil {
 		dll.first.list = dll
 	}
+	dll.len++
 
 }
 
@@ -116,4 +103,5 @@ func (dll *DoubleLinkedList) PushBack(i Item) {
 	if dll.last.list == nil {
 		dll.last.list = dll
 	}
+	dll.len++
 }
