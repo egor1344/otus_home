@@ -1,7 +1,7 @@
 package parallel
 
 import (
-	"fmt"
+	"errors"
 	"sync"
 )
 
@@ -11,17 +11,41 @@ type CustomFunc func() error
 // Parallel функция для выполнения задач
 // number количество одновременных выполнений задач
 func Parallel(number int, numError int, workers []CustomFunc) error {
+	worker := make(chan func() error)
+	errorCount := 0
 	var wg sync.WaitGroup
-	wg.Add(len(workers))
+	var m sync.Mutex
 
-	for _, worker := range workers {
-		go func () {
-			err := worker()
-			if err != nil {fmt.Println("error func", worker)}
-			wg.Done()
+	wg.Add(1)
+	for i := 0; i < number; i++ {
+		go func() error {
+			if errorCount <= numError {
+				for {
+					select {
+					case task := <-worker:
+						if task() != nil {
+							m.Lock()
+							errorCount++
+							m.Unlock()
+						}
+						wg.Done()
+					}
+				}
+			} else {
+				return errors.New("max count error")
+			}
 		}()
 	}
 
-	wg.Wait()
+	for i := 0; i < len(workers); {
+		if errorCount <= numError {
+			worker <- workers[i]
+			wg.Add(1)
+			i++
+		} else {
+			return errors.New("max count error")
+		}
+
+	}
 	return nil
 }
