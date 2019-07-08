@@ -2,10 +2,9 @@ package gocopy
 
 
 import (
-	"log"
 	"testing"
 	)
 
 func TestCopyFile(t *testing.T) {
-	log.Println("test")
+	GoCopy("/home/mrk/Pictures/1.MP4", "/home/mrk/Pictures/1_copy.MP4", 1024, 1024)
 }
