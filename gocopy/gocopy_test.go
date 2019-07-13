@@ -1,10 +1,16 @@
 package gocopy
 
-
 import (
 	"testing"
-	)
+)
 
 func TestCopyFile(t *testing.T) {
-	GoCopy("/home/mrk/Pictures/1.MP4", "/home/mrk/Pictures/1_copy.MP4", 1024, 1024)
+	err := GoCopy("/home/mrk/Videos/1.txt", "/home/mrk/Videos/1_copy.txt", 2048, 1024)
+	if err != nil {
+		t.Error("Wrong result ", err)
+	}
+	err = GoCopy("/home/mrk/Videos/1.txt", "/home/mrk/Videos/1_copy.txt", 2048, 3000)
+	if err == nil {
+		t.Error("Wrong result ")
+	}
 }
