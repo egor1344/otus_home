@@ -6,5 +6,7 @@
   3. unpacking - done - Занятие №2
   4. freqanalys - done - Занятие №3
   5. findmax - done - Занятие №4
-  5. doublelinkedlist - done - Занятие №5
-  6. logotus - done - Занятие №6
+  6. doublelinkedlist - done - Занятие №5
+  7. logotus - done - Занятие №6
+  8. gocpy - done - Занятие №8
+  9. go-envdir - В процессе - Занятие №10
