@@ -1,13 +1,19 @@
 package main
 
 import (
-	"fmt"
+	"github.com/egor1344/otus_home/go-envdir"
+	"log"
 	"os"
-	go_envdir "github.com/egor1344/otus_home/go-envdir"
 )
 
 func main() {
-	args_programm := os.Args[1:]
-	fmt.Println(args_programm)
-	go_envdir.GoEnvDir(args_programm[1], args_programm[2])
+	argsProgramm := os.Args[1:]
+	if len(argsProgramm) < 2 {
+		log.Fatalln("Параметров меньше двух")
+	}
+	err := go_envdir.GoEnvDir(argsProgramm[0], argsProgramm[1])
+	if err != nil {
+		log.Fatalln("Параметров меньше двух", err)
+		return
+	}
 }
