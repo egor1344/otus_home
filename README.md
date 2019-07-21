@@ -9,4 +9,6 @@
   6. doublelinkedlist - done - Занятие №5
   7. logotus - done - Занятие №6
   8. gocpy - done - Занятие №8
-  9. go-envdir - В процессе - Занятие №10
+  9. go-envdir - done - Занятие №10
+  10. microservice_skeleton - done - Занятие 13
+  

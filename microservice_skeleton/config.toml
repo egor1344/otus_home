@@ -1,0 +1,5 @@
+title = "TOML Example"
+
+[web]
+site="localhost"
+port=8000
