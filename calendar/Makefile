@@ -4,16 +4,16 @@ GOFILES=$(wildcard *.go)
 GONAME=$(shell basename "$(PWD)")
 
 build:
-	@echo "Building $(GOFILES) files in ./cmd/"
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build .
 
-install:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build .
-	
 test:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go test -cover
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go test -v  ./...
 
 lint:
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN)  golangci-lint run --enable-all
 
-.PHONY: build get install run testa
+run:
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go run cmd/calendar/main.go
+
+
+.PHONY: lint  test build run

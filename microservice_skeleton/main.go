@@ -9,7 +9,7 @@ import (
 
 func main() {
 	logger, err := getLogger()
-	defer logger.Sync() // flushes buffer, if any
+	defer logger.Sync()
 	if err != nil {
 		logger.Fatal(err)
 	}
@@ -22,7 +22,7 @@ func main() {
 		logger.Info(r.URL.Path)
 	})
 	addr := viper.GetString("web.site") + ":" + viper.GetString("web.port")
-	println("Listen in ", addr)
+	logger.Info("Listen in ", addr)
 	err = http.ListenAndServe(addr, nil)
 	if err != nil {
 		logger.Fatal(err)
