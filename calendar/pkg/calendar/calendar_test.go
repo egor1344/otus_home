@@ -1,14 +1,15 @@
 package calendar
 
 import (
+	"github.com/golang/protobuf/ptypes"
 	"testing"
-	"time"
 )
 
 func TestCalendar_AddEvent(t *testing.T) {
 	calendar := Calendar{}
 	calendar.Init()
-	newEvent := Event{id: 1, Date: time.Now(), Name: "test", Description: "Description"}
+
+	newEvent := Event{Id: 1, Date: ptypes.TimestampNow(), Title: "test", Description: "Description"}
 	err := calendar.AddEvent(&newEvent)
 	if err != nil {
 		t.Error(err)
@@ -19,7 +20,7 @@ func TestCalendar_AddEvent(t *testing.T) {
 	if len(calendar.Events) != 1 {
 		t.Error("Event dont append in calendar")
 	}
-	newEvent = Event{id: 2, Date: time.Now(), Name: "test", Description: "Description"}
+	newEvent = Event{Id: 2, Date: ptypes.TimestampNow(), Title: "test", Description: "Description"}
 	err = calendar.AddEvent(&newEvent)
 	if err != nil {
 		t.Error(err)
@@ -39,7 +40,7 @@ func TestCalendar_AddEvent(t *testing.T) {
 func TestCalendar_UpdateEvent(t *testing.T) {
 	calendar := Calendar{}
 	calendar.Init()
-	newEvent := Event{id: 1, Date: time.Now(), Name: "test", Description: "Description"}
+	newEvent := Event{Id: 1, Date: ptypes.TimestampNow(), Title: "test", Description: "Description"}
 	err := calendar.AddEvent(&newEvent)
 	if err != nil {
 		t.Error(err)
@@ -50,15 +51,15 @@ func TestCalendar_UpdateEvent(t *testing.T) {
 	if len(calendar.Events) != 1 {
 		t.Error("Event dont append in calendar")
 	}
-	newEvent = Event{id: 1, Date: time.Now(), Name: "test2", Description: "Description2"}
-	err = calendar.UpdateEvent(0, &newEvent)
+	newEvent = Event{Id: 2, Date: ptypes.TimestampNow(), Title: "test2", Description: "Description"}
+	err = calendar.UpdateEvent(1, &newEvent)
 	if err != nil {
 		t.Error(err)
 	}
 	if len(calendar.Events) != 1 {
 		t.Error("Event append in calendar when update func")
 	}
-	if calendar.Events[1].Name != "test2" {
+	if calendar.Events[1].Title != "test2" {
 		t.Error("Wrong update event in calendar")
 	}
 
@@ -67,7 +68,7 @@ func TestCalendar_UpdateEvent(t *testing.T) {
 func TestCalendar_DeleteEvent(t *testing.T) {
 	calendar := Calendar{}
 	calendar.Init()
-	newEvent := Event{id: 1, Date: time.Now(), Name: "test", Description: "Description"}
+	newEvent := Event{Id: 1, Date: ptypes.TimestampNow(), Title: "test2", Description: "Description"}
 	err := calendar.AddEvent(&newEvent)
 	if err != nil {
 		t.Error(err)
@@ -78,7 +79,7 @@ func TestCalendar_DeleteEvent(t *testing.T) {
 	if len(calendar.Events) != 1 {
 		t.Error("Event dont append in calendar")
 	}
-	err = calendar.DeleteEvent(newEvent.id)
+	err = calendar.DeleteEvent(newEvent.Id)
 	if err != nil {
 		t.Error(err)
 	}

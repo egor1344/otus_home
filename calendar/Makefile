@@ -15,5 +15,8 @@ lint:
 run:
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go run cmd/calendar/main.go
 
+generate_proto:
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) protoc --go_out=. models/event/event.proto
+
 
 .PHONY: lint  test build run
