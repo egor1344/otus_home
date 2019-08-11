@@ -8,7 +8,8 @@
   5. findmax - done - Занятие №4
   6. doublelinkedlist - done - Занятие №5
   7. logotus - done - Занятие №6
-  8. gocpy - done - Занятие №8
-  9. go-envdir - done - Занятие №10
-  10. microservice_skeleton - done - Занятие 13
+  8. gocpy - done - Занятие №11
+  9. go-envdir - done - Занятие №13
+  10. microservice_skeleton - done - Занятие 14
+  11. calendar - на проверке - Занятие 17
   
