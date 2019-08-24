@@ -1,6 +1,7 @@
 # otus_home
 
-## Список дз:
+## Список дз :
+
   1. printtime - done - Занятие №1
   2. shortlink - done - Занятие №1
   3. unpacking - done - Занятие №2
@@ -11,5 +12,5 @@
   8. gocpy - done - Занятие №11
   9. go-envdir - done - Занятие №13
   10. microservice_skeleton - done - Занятие 14
-  11. calendar - на проверке - Занятие 17
-  
+  11. calendar - done - Занятие 17
+  12. telnet - на проверке - Занятие 19
