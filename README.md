@@ -13,4 +13,6 @@
   9. go-envdir - done - Занятие №13
   10. microservice_skeleton - done - Занятие 14
   11. calendar - done - Занятие 17
-  12. telnet - на проверке - Занятие 19
+  12. telnet - done - Занятие 19
+  13. GRPC - на проверке
+  14. Database - на проверке
